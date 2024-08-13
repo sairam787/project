@@ -1,0 +1,22 @@
+
+DECLARE ch,ch1 CHARACTER;
+DECLARE i INTEGER 1;
+
+ cREATE COMPUTE MODULE mf_consoleLog_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		
+	set ch=cast(ASBITSTREAM(InputRoot.XMLNSC.emp)as CHARACTER CCSID 1208 ENCODING 546);
+	log EVENT VALUES('xml received',ch);
+	set OutputRoot.JSON.Data=InputRoot.XMLNSC;
+	set ch1=cast(ASBITSTREAM( OutputRoot.JSON)as CHARACTER CCSID 1208 ENCODING 546);
+	log EVENT VALUES('json converted',i,'hi','hello','ji','sai','siva','fd','j','hi','jj');
+
+	
+	END;
+END MODULE;
